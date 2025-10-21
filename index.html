@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instalación de Samba en Sistema Virtual</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Partículas de fondo -->
+    <div id="particles-js"></div>
+    
+    <header>
+        <div class="container">
+            <h1>Instalación de Samba en Sistema Virtual</h1>
+            <p class="subtitle">Guía completa con animaciones y diseño 4K para configurar un servidor de archivos con Samba</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section id="introduction" class="fade-in">
+            <h2>Introducción</h2>
+            <p>Samba es una implementación libre del protocolo de archivos compartidos de Windows (SMB/CIFS) que permite la interoperabilidad entre sistemas Linux/Unix y Windows. En esta guía, aprenderás a instalar y configurar Samba en un sistema operativo virtual para crear un servidor de archivos.</p>
+            
+            <div class="note">
+                <p><strong>Nota:</strong> Esta guía asume que estás utilizando una distribución basada en Debian/Ubuntu. Los comandos pueden variar ligeramente en otras distribuciones.</p>
+            </div>
+        </section>
+        
+        <section id="prerequisites" class="fade-in">
+            <h2>Requisitos Previos</h2>
+            <ul>
+                <li>Un sistema operativo virtual (Ubuntu Server recomendado)</li>
+                <li>Conexión a Internet para descargar paquetes</li>
+                <li>Acceso de administrador (sudo)</li>
+                <li>Conocimientos básicos de línea de comandos</li>
+                <li>Al menos 1GB de RAM y 10GB de almacenamiento</li>
+            </ul>
+        </section>
+        
+        <section id="progress" class="progress-section fade-in">
+            <h2>Progreso de Instalación</h2>
+            <div class="progress-text">Progreso: <span id="progress-percent">0%</span></div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <p>Sigue los pasos a continuación para completar la instalación. La barra de progreso se actualizará automáticamente.</p>
+        </section>
+        
+        <section id="steps" class="steps-container">
+            <div class="step fade-in">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Actualizar el Sistema</h3>
+                </div>
+                <p>Antes de instalar cualquier software, es importante actualizar los repositorios y paquetes del sistema para asegurarse de tener las últimas versiones y correcciones de seguridad.</p>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-title">Terminal</div>
+                        <div class="code-actions">
+                            <button class="code-btn" onclick="copyCode('code1')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="code-btn" onclick="executeCode('code1')">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-block" id="code1">
+                        <span class="terminal-line"><span class="terminal-prompt">usuario@servidor:~$</span> <span class="terminal-command">sudo apt update && sudo apt upgrade -y</span></span>
+                        <span class="terminal-line"><span class="terminal-comment"># Actualiza la lista de paquetes y luego actualiza los paquetes instalados</span></span>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <p>Este comando actualiza la lista de paquetes disponibles y luego actualiza los paquetes instalados a sus versiones más recientes. La opción <code>-y</code> confirma automáticamente la instalación.</p>
+                </div>
+            </div>
+            
+            <div class="step fade-in">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Instalar Samba</h3>
+                </div>
+                <p>Una vez actualizado el sistema, procedemos a instalar el paquete de Samba junto con algunas utilidades adicionales.</p>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-title">Terminal</div>
+                        <div class="code-actions">
+                            <button class="code-btn" onclick="copyCode('code2')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="code-btn" onclick="executeCode('code2')">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-block" id="code2">
+                        <span class="terminal-line"><span class="terminal-prompt">usuario@servidor:~$</span> <span class="terminal-command">sudo apt install samba samba-common-bin -y</span></span>
+                        <span class="terminal-line"><span class="terminal-comment"># Instala Samba y utilidades adicionales</span></span>
+                    </div>
+                </div>
+                
+                <div class="success">
+                    <p>Después de la instalación, verifica que Samba se esté ejecutando con: <code>sudo systemctl status smbd</code></p>
+                </div>
+            </div>
+            
+            <div class="step fade-in">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Configurar el Firewall</h3>
+                </div>
+                <p>Si tienes un firewall activo (como UFW), necesitas permitir el tráfico de Samba para que otros dispositivos puedan acceder al servidor.</p>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-title">Terminal</div>
+                        <div class="code-actions">
+                            <button class="code-btn" onclick="copyCode('code3')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="code-btn" onclick="executeCode('code3')">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-block" id="code3">
+                        <span class="terminal-line"><span class="terminal-prompt">usuario@servidor:~$</span> <span class="terminal-command">sudo ufw allow samba</span></span>
+                        <span class="terminal-line"><span class="terminal-comment"># Permite el tráfico de Samba a través del firewall</span></span>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <p>Si estás utilizando un firewall diferente, consulta su documentación para permitir los puertos de Samba (generalmente 139 y 445).</p>
+                </div>
+            </div>
+            
+            <div class="step fade-in">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Crear un Directorio Compartido</h3>
+                </div>
+                <p>Crea un directorio que será compartido a través de la red y establece los permisos adecuados.</p>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-title">Terminal</div>
+                        <div class="code-actions">
+                            <button class="code-btn" onclick="copyCode('code4')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="code-btn" onclick="executeCode('code4')">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-block" id="code4">
+                        <span class="terminal-line"><span class="terminal-prompt">usuario@servidor:~$</span> <span class="terminal-command">sudo mkdir -p /srv/samba/share</span></span>
+                        <span class="terminal-line"><span class="terminal-comment"># Crea el directorio compartido</span></span>
+                        <span class="terminal-line"><span class="terminal-prompt">usuario@servidor:~$</span> <span class="terminal-command">sudo chmod -R 0777 /srv/samba/share</span></span>
+                        <span class="terminal-line"><span class="terminal-comment"># Establece permisos de lectura, escritura y ejecución para todos</span></span>
+                        <span class="terminal-line"><span class="terminal-prompt">usuario@servidor:~$</span> <span class="terminal-command">sudo chown -R nobody:nogroup /srv/samba/share</span></span>
+                        <span class="terminal-line"><span class="terminal-comment"># Cambia el propietario del directorio</span></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step fade-in">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">Configurar Samba</h3>
+                </div>
+                <p>Edita el archivo de configuración de Samba para definir el recurso compartido. Puedes usar nano, vim o cualquier editor de texto que prefieras.</p>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-title">Terminal</div>
+                        <div class="code-actions">
+                            <button class="code-btn" onclick="copyCode('code5')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="code-btn" onclick="executeCode('code5')">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-block" id="code5">
+                        <span class="terminal-line"><span class="terminal-prompt">usuario@servidor:~$</span> <span class="terminal-command">sudo nano /etc/samba/smb.conf</span></span>
+                        <span class="terminal-line"><span class="terminal-comment"># Abre el archivo de configuración de Samba con nano</span></span>
+                    </div>
+                </div>
+                
+                <p>Al final del archivo, añade la siguiente configuración para definir el recurso compartido:</p>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-title">/etc/samba/smb.conf</div>
+                        <div class="code-actions">
+                            <button class="code-btn" onclick="copyCode('code5b')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-block" id="code5b">
+                        <span class="terminal-line"><span class="terminal-comment"># Compartir archivos Samba</span></span>
+                        <span class="terminal-line">[share]</span>
+                        <span class="terminal-line">&nbsp;&nbsp;comment = Compartido de Samba</span>
+                        <span class="terminal-line">&nbsp;&nbsp;path = /srv/samba/share</span>
+                        <span class="terminal-line">&nbsp;&nbsp;browseable = yes</span>
+                        <span class="terminal-line">&nbsp;&nbsp;read only = no</span>
+                        <span class="terminal-line">&nbsp;&nbsp;guest ok = yes</span>
+                        <span class="terminal-line">&nbsp;&nbsp;create mask = 0755</span>
+                    </div>
+                </div>
+                
+                <div class="warning">
+                    <p><strong>Advertencia:</strong> La configuración <code>guest ok = yes</code> permite acceso anónimo. Para entornos de producción, considera implementar autenticación de usuarios.</p>
+                </div>
+            </div>
+            
+            <div class="step fade-in">
+                <div class="step-header">
+                    <div class="step-number">6</div>
+                    <h3 class="step-title">Reiniciar el Servicio Samba</h3>
+                </div>
+                <p>Después de modificar la configuración, reinicia el servicio para aplicar los cambios y habilita Samba para que se inicie automáticamente al arrancar el sistema.</p>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-title">Terminal</div>
+                        <div class="code-actions">
+                            <button class="code-btn" onclick="copyCode('code6')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="code-btn" onclick="executeCode('code6')">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-block" id="code6">
+                        <span class="terminal-line"><span class="terminal-prompt">usuario@servidor:~$</span> <span class="terminal-command">sudo systemctl restart smbd nmbd</span></span>
+                        <span class="terminal-line"><span class="terminal-comment"># Reinicia los servicios de Samba</span></span>
+                        <span class="terminal-line"><span class="terminal-prompt">usuario@servidor:~$</span> <span class="terminal-command">sudo systemctl enable smbd nmbd</span></span>
+                        <span class="terminal-line"><span class="terminal-comment"># Habilita Samba para que se inicie automáticamente</span></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step fade-in">
+                <div class="step-header">
+                    <div class="step-number">7</div>
+                    <h3 class="step-title">Verificar la Configuración</h3>
+                </div>
+                <p>Comprueba que la configuración de Samba sea válida y verifica los recursos compartidos disponibles.</p>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-title">Terminal</div>
+                        <div class="code-actions">
+                            <button class="code-btn" onclick="copyCode('code7')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="code-btn" onclick="executeCode('code7')">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-block" id="code7">
+                        <span class="terminal-line"><span class="terminal-prompt">usuario@servidor:~$</span> <span class="terminal-command">testparm</span></span>
+                        <span class="terminal-line"><span class="terminal-comment"># Verifica la sintaxis del archivo de configuración</span></span>
+                        <span class="terminal-line"><span class="terminal-prompt">usuario@servidor:~$</span> <span class="terminal-command">smbclient -L localhost</span></span>
+                        <span class="terminal-line"><span class="terminal-comment"># Lista los recursos compartidos disponibles</span></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step fade-in">
+                <div class="step-header">
+                    <div class="step-number">8</div>
+                    <h3 class="step-title">Acceder al Recurso Compartido</h3>
+                </div>
+                <p>Ahora puedes acceder al recurso compartido desde otros dispositivos en la red.</p>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-title">Windows</div>
+                        <div class="code-actions">
+                            <button class="code-btn" onclick="copyCode('code8')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-block" id="code8">
+                        <span class="terminal-line"><span class="terminal-comment"># En el Explorador de archivos, escribe:</span></span>
+                        <span class="terminal-line">\\IP-DEL-SERVIDOR\share</span>
+                    </div>
+                </div>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-title">Linux</div>
+                        <div class="code-actions">
+                            <button class="code-btn" onclick="copyCode('code8b')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-block" id="code8b">
+                        <span class="terminal-line"><span class="terminal-prompt">usuario@cliente:~$</span> <span class="terminal-command">sudo mkdir -p /mnt/samba</span></span>
+                        <span class="terminal-line"><span class="terminal-comment"># Crea un punto de montaje</span></span>
+                        <span class="terminal-line"><span class="terminal-prompt">usuario@cliente:~$</span> <span class="terminal-command">sudo mount -t cifs //IP-DEL-SERVIDOR/share /mnt/samba -o guest</span></span>
+                        <span class="terminal-line"><span class="terminal-comment"># Monta el recurso compartido</span></span>
+                    </div>
+                </div>
+                
+                <div class="success">
+                    <p>¡Felicidades! Has configurado exitosamente un servidor de archivos Samba en tu sistema operativo virtual. Ahora puedes compartir archivos entre diferentes sistemas operativos en tu red.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="troubleshooting" class="fade-in">
+            <h2>Solución de Problemas</h2>
+            
+            <div class="step">
+                <h3>Problemas Comunes y Soluciones</h3>
+                
+                <div class="warning">
+                    <p><strong>No puedo acceder al recurso compartido</strong></p>
+                    <ul>
+                        <li>Verifica que el servicio Samba esté ejecutándose: <code>sudo systemctl status smbd</code></li>
+                        <li>Comprueba que el firewall permita el tráfico de Samba</li>
+                        <li>Asegúrate de estar usando la IP correcta del servidor</li>
+                        <li>Confirma que el nombre del recurso compartido sea correcto</li>
+                    </ul>
+                </div>
+                
+                <div class="warning">
+                    <p><strong>Problemas de permisos</strong></p>
+                    <ul>
+                        <li>Verifica los permisos del directorio compartido: <code>ls -la /srv/samba/share</code></li>
+                        <li>Asegúrate de que SELinux o AppArmor no estén bloqueando el acceso</li>
+                        <li>Considera crear usuarios de Samba específicos: <code>sudo smbpasswd -a usuario</code></li>
+                    </ul>
+                </div>
+                
+                <div class="note">
+                    <p>Si continúas teniendo problemas, consulta los registros de Samba en <code>/var/log/samba/</code> para obtener más información sobre los errores.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>Guía de instalación de Samba en sistema operativo virtual</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+                <p>© 2025 - Todos los derechos para todo público</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script para partículas -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script>
+        // Inicializar partículas de fondo
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#3498db" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#3498db",
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "none",
+                        random: true,
+                        out_mode: "out"
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "repulse" },
+                        onclick: { enable: true, mode: "push" }
+                    }
+                }
+            });
+        });
+
+        // Función para copiar código al portapapeles
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const text = codeElement.textContent || codeElement.innerText;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // Mostrar notificación de éxito
+                const button = event.target.closest('.code-btn');
+                const originalIcon = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalIcon;
+                }, 2000);
+            }).catch(err => {
+                console.error('Error al copiar: ', err);
+            });
+        }
+        
+        // Función para simular ejecución de código (solo visual)
+        function executeCode(elementId) {
+            const codeBlock = document.getElementById(elementId);
+            const button = event.target.closest('.code-btn');
+            const originalIcon = button.innerHTML;
+            
+            // Efecto visual de ejecución
+            codeBlock.style.animation = 'pulse 0.5s';
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            
+            setTimeout(() => {
+                codeBlock.style.animation = '';
+                button.innerHTML = originalIcon;
+                
+                // Mostrar mensaje de éxito
+                const successMsg = document.createElement('div');
+                successMsg.textContent = 'Comando ejecutado (simulación)';
+                successMsg.style.cssText = 'position:fixed; top:20px; right:20px; background:#2ecc71; color:white; padding:10px 15px; border-radius:5px; z-index:1000;';
+                document.body.appendChild(successMsg);
+                
+                setTimeout(() => {
+                    document.body.removeChild(successMsg);
+                }, 3000);
+            }, 1500);
+        }
+        
+        // Función para actualizar la barra de progreso
+        function updateProgress() {
+            const steps = document.querySelectorAll('.step');
+            const progressBar = document.getElementById('progress-bar');
+            const progressPercent = document.getElementById('progress-percent');
+            
+            // Calcular el progreso basado en la posición de desplazamiento
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollPercent = (scrollTop / documentHeight) * 100;
+            
+            // Actualizar la barra de progreso
+            progressBar.style.width = scrollPercent + '%';
+            progressPercent.textContent = Math.round(scrollPercent) + '%';
+            
+            // Resaltar el paso actual
+            steps.forEach(step => {
+                const rect = step.getBoundingClientRect();
+                if (rect.top >= 0 && rect.top <= windowHeight / 2) {
+                    step.style.transform = 'translateY(-5px)';
+                    step.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.4)';
+                    step.style.borderColor = 'rgba(52, 152, 219, 0.4)';
+                } else {
+                    step.style.transform = '';
+                    step.style.boxShadow = '';
+                    step.style.borderColor = '';
+                }
+            });
+        }
+        
+        // Animación de entrada para elementos
+        function checkFadeIn() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // Actualizar el progreso al cargar la página y al desplazarse
+        window.addEventListener('load', () => {
+            updateProgress();
+            checkFadeIn();
+        });
+        
+        window.addEventListener('scroll', () => {
+            updateProgress();
+            checkFadeIn();
+        });
+        
+        window.addEventListener('resize', updateProgress);
+    </script>
+</body>
+</html>
