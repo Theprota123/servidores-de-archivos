@@ -1,6 +1,7 @@
 # 🖥️ Servidor de Archivos Samba en Sistema Virtual
 <img width="198" height="147" alt="jhon anderson" src="https://github.com/user-attachments/assets/a895f339-5995-4564-bb93-37ffa56bc89b" />
-
+# jhon ortega
+# limberth vallejos
 
 ![Samba Server](https://img.shields.io/badge/Samba-4.15.5-orange)
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04%20LTS-orange)
